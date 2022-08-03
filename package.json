@@ -1,0 +1,25 @@
+{
+  "name": "anztokenizer",
+  "version": "1.0.0",
+  "description": "Tokenisation for credit card details using Node.js and noSql",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app/index",
+    "dev": "nodemon app/index.js --ignore db.json"
+  },
+  "author": "Daniel Cairns",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "lokijs": "^1.5.12",
+    "mocha": "^10.0.0",
+    "path": "^0.12.7",
+    "tokenize-this": "^1.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
