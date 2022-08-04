@@ -1,23 +1,25 @@
-var loki = require('lokijs');
-var database = new loki('db.json');
+const loki = require('lokijs');
+const database = new loki('db.json');
+const fs = require('fs');
+const rawdata = fs.readFileSync('rawData.json');
 
 database.autosave = true;
-var people = database.addCollection('people');
-people.insert({
-    'name' : 'dan', 'id': 'nutjob'
-});
+var accData = database.addCollection('accData');
 
-var cardData = database.addCollection('cards');
-cardData.insert(
-    { 1: [
-        '4111-1111-1111-1111',
-        '4444-3333-2222-1111',
-        '4444-1111-2222-3333',
-    ]}
-);
+var acc = JSON.parse(rawdata).acc;
+var hash = JSON.parse(rawdata).hash;
+
+setupDB = () => {
+    acc.forEach(item => {
+        accData.insert({
+            'number': item,
+            'token': hash[acc.indexOf(item)] 
+        });
+    });
+}
+
+setupDB();
 
 database.saveDatabase();
 
-db = database;
-
-module.exports = db;
+module.exports = accData;

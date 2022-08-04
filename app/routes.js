@@ -1,35 +1,51 @@
-const express = require('express');
-const router = express.Router();
 const app = require('./index');
-// var loki = require('lokijs');
-// var db = new loki('db.json');
+const db = require('./database');
+const express = require('express');
 
-var db = require('./database');
+const router = express.Router();
 
-router.get('/', async (req,res) => {
-    await req;
-    let data = 'home';
+const fs = require('fs');
+const rawdata = fs.readFileSync('rawData.json');
 
-    res.render('index', {data:data});
+var acc = JSON.parse(rawdata).acc;
+var hash = JSON.parse(rawdata).hash;
+
+router.get('/tokenize', (req,res) => {
+    const Output = []
+    acc.forEach(row => {
+        let found = db.findOne({"number": { '$eq': row}});
+        Output.push(found.token);
+    });
+    res.send({Output}); 
 });
 
-router.get('/tokenize', async (req,res) => {
-    await req;
-    let data = await db.getCollection('cards');
-    let s = await db.serialize();
-    
-    console.log(s);
-    res.render('index', {data:data});
+router.get('/detokenize', (req,res) => {
+    const Output = []
+    hash.forEach(row => {
+        let found = db.findOne({"token": { '$eq': row}});
+        Output.push(found.number);
+    });
+    res.send({Output});
 });
 
-router.get('/detokenize', async (req,res) => {
-    await req;
-    let data = req.route.path;
-    
-    res.render('index', {data:data});
+router.post('/tokenize', (req,res) => {
+    const Input = req.body.text;
+    const Output = []
+    Input.forEach(row => {
+        let found = db.findOne({"number": { '$eq': row}});
+        Output.push(found.token);
+    });
+    res.send({Output}); 
 });
 
-
-
+router.post('/detokenize', (req,res) => {
+    const Input = req.body.text;
+    const Output = []
+    Input.forEach(row => {
+        let found = db.findOne({"token": { '$eq': row}});
+        Output.push(found.number);
+    });
+    res.send({Output});
+});
 
 module.exports = router;
