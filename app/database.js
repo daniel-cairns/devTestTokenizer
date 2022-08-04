@@ -1,4 +1,5 @@
 const loki = require('lokijs');
+// TODO if db.json does not exist we need to create it
 const database = new loki('db.json');
 const fs = require('fs');
 const rawdata = fs.readFileSync('rawData.json');
