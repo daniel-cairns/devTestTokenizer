@@ -16,6 +16,7 @@ router.get('/tokenize', (req,res) => {
         let found = db.findOne({"number": { '$eq': row}});
         Output.push(found.token);
     });
+    res.setHeader('Content-Type', 'application/json');
     res.send({Output}); 
 });
 
@@ -25,6 +26,7 @@ router.get('/detokenize', (req,res) => {
         let found = db.findOne({"token": { '$eq': row}});
         Output.push(found.number);
     });
+    res.setHeader('Content-Type', 'application/json');
     res.send({Output});
 });
 
@@ -35,6 +37,7 @@ router.post('/tokenize', (req,res) => {
         let found = db.findOne({"number": { '$eq': row}});
         Output.push(found.token);
     });
+    res.setHeader('Content-Type', 'application/json');
     res.send({Output}); 
 });
 
@@ -45,6 +48,7 @@ router.post('/detokenize', (req,res) => {
         let found = db.findOne({"token": { '$eq': row}});
         Output.push(found.number);
     });
+    res.setHeader('Content-Type', 'application/json');
     res.send({Output});
 });
 

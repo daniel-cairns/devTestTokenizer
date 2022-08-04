@@ -27,6 +27,7 @@ Basic instructions to get started will logged to the terminal
 Or you can go to http://localhost:3000
 
 ## Testing
+\$ npm test
 
 ## Production
 
@@ -36,6 +37,10 @@ Or you can go to http://localhost:3000
 4. Code blocks in routes could be handled in one file
 5. Make use of build script to minify and create dist/public folder
 6. Multiple security improvements
+7. Substitute bodyparser
+8. Validate incoming data
+9. Null checks for input data arrays
+10. Try catch blocks
 
 # FYI
 I know this was a test but there errors in the values provided in your input 
